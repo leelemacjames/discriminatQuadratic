@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="/" aria-current="page">Home</a>
+      <a href="/page2.html">Other page</a>
+    </nav>
+    <main>
+      <h1>Home page</h1>
+    </main>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Discriminant: Nature of Quadratic Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .compact-section {
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .formula {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .interactive-section {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+        
+        .controls-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .graph-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .input-wrapper {
+            width: 100%;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95em;
+        }
+        
+        .positive {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        
+        .zero {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+        }
+        
+        .negative {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .case-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .case-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .case-positive { border-top: 5px solid #28a745; }
+        .case-zero { border-top: 5px solid #ffc107; }
+        .case-negative { border-top: 5px solid #dc3545; }
+        
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            display: block;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .key-point {
+            background: #e7f0ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        @media (max-width: 900px) {
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls-panel {
+                margin-bottom: 20px;
+            }
+        }
+        
+        .equation-display {
+            font-size: 1.1em;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .solutions {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .solution-item {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Discriminant</h1>
+            <p class="subtitle">Understanding the Nature of Quadratic Solutions</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2>What is the Discriminant?</h2>
+                <p>For a quadratic equation in standard form:</p>
+                <div class="formula-box">
+                    <div class="formula">ax² + bx + c = 0</div>
+                </div>
+                <p>The <strong>discriminant</strong> is the expression under the square root in the quadratic formula:</p>
+                <div class="formula-box">
+                    <div class="formula">Δ = b² - 4ac</div>
+                </div>
+                <div class="key-point">
+                    <strong>Why it matters:</strong> The discriminant tells us everything about the nature and number of solutions without actually solving the equation.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>The Three Cases</h2>
+                <div class="cases-grid">
+                    <div class="case-card case-positive">
+                        <h3>Δ > 0 (Positive)</h3>
+                        <p><strong>Two distinct real roots</strong></p>
+                        <p>The parabola crosses the x-axis at two different points.</p>
+                        <p style="margin-top: 15px;"><em>Example:</em> x² - 5x + 6 = 0</p>
+                        <p>Δ = 25 - 24 = 1</p>
+                        <p>Solutions: x = 2 and x = 3</p>
+                    </div>
+                    
+                    <div class="case-card case-zero">
+                        <h3>Δ = 0 (Zero)</h3>
+                        <p><strong>One repeated real root</strong></p>
+                        <p>The parabola touches the x-axis at exactly one point (the vertex).</p>
+                        <p style="margin-top: 15px;"><em>Example:</em> x² - 4x + 4 = 0</p>
+                        <p>Δ = 16 - 16 = 0</p>
+                        <p>Solution: x = 2 (repeated)</p>
+                    </div>
+                    
+                    <div class="case-card case-negative">
+                        <h3>Δ < 0 (Negative)</h3>
+                        <p><strong>No real roots</strong></p>
+                        <p>The parabola doesn't cross the x-axis. Solutions are complex numbers.</p>
+                        <p style="margin-top: 15px;"><em>Example:</em> x² + 2x + 5 = 0</p>
+                        <p>Δ = 4 - 20 = -16</p>
+                        <p>Solutions: x = -1 ± 2i</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section compact-section">
+                <h2>Interactive Explorer</h2>
+                <div class="interactive-section">
+                    <div class="interactive-grid">
+                        <div class="controls-panel">
+                            <h3 style="margin-bottom: 15px; color: #667eea; font-size: 1.2em;">Controls</h3>
+                            
+                            <div class="input-group">
+                                <div class="input-wrapper">
+                                    <label for="coef-a">a (x² coefficient):</label>
+                                    <input type="number" id="coef-a" value="1" step="0.1" oninput="calculate()">
+                                </div>
+                                <div class="input-wrapper">
+                                    <label for="coef-b">b (x coefficient):</label>
+                                    <input type="number" id="coef-b" value="-8" step="0.1" oninput="calculate()">
+                                </div>
+                                <div class="input-wrapper">
+                                    <label for="coef-c">c (constant):</label>
+                                    <input type="number" id="coef-c" value="6" step="0.1" oninput="calculate()">
+                                </div>
+                            </div>
+                            
+                            <div id="result" class="result-box"></div>
+                        </div>
+                        
+                        <div class="graph-panel">
+                            <h3 style="margin-bottom: 15px; color: #667eea; font-size: 1.2em;">Visualization</h3>
+                            <canvas id="graph" width="500" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Why the Discriminant Works</h2>
+                <p>The quadratic formula is:</p>
+                <div class="formula-box">
+                    <div class="formula">x = (-b ± √(b² - 4ac)) / 2a</div>
+                </div>
+                <p>The discriminant Δ = b² - 4ac appears under the square root. This is crucial because:</p>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li><strong>If Δ > 0:</strong> We're taking the square root of a positive number, giving us two different values when we apply the ± sign.</li>
+                    <li><strong>If Δ = 0:</strong> The square root is zero, so ± 0 gives us the same answer twice.</li>
+                    <li><strong>If Δ < 0:</strong> We can't take the square root of a negative number in the real number system, so there are no real solutions.</li>
+                </ul>
+                
+                <div class="key-point">
+                    <strong>Geometric interpretation:</strong> The discriminant essentially measures the "distance" between the parabola's vertex and the x-axis. A positive discriminant means the vertex is beyond the x-axis, zero means it's exactly on it, and negative means it doesn't reach.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function calculate() {
+            const a = parseFloat(document.getElementById('coef-a').value);
+            const b = parseFloat(document.getElementById('coef-b').value);
+            const c = parseFloat(document.getElementById('coef-c').value);
+            
+            if (a === 0) {
+                alert('Coefficient "a" cannot be zero (it wouldn\'t be a quadratic equation)!');
+                return;
+            }
+            
+            const discriminant = b * b - 4 * a * c;
+            const resultDiv = document.getElementById('result');
+            
+            let resultHTML = `<div class="equation-display">`;
+            resultHTML += `${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`;
+            resultHTML += `</div>`;
+            
+            resultHTML += `<p><strong>Discriminant (Δ):</strong> ${discriminant.toFixed(4)}</p>`;
+            
+            if (discriminant > 0) {
+                resultDiv.className = 'result-box positive';
+                const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                resultHTML += `<p><strong>Nature:</strong> Two distinct real roots</p>`;
+                resultHTML += `<div class="solutions">`;
+                resultHTML += `<div class="solution-item">x₁ = ${root1.toFixed(4)}</div>`;
+                resultHTML += `<div class="solution-item">x₂ = ${root2.toFixed(4)}</div>`;
+                resultHTML += `</div>`;
+            } else if (Math.abs(discriminant) < 0.0001) {
+                resultDiv.className = 'result-box zero';
+                const root = -b / (2 * a);
+                resultHTML += `<p><strong>Nature:</strong> One repeated real root</p>`;
+                resultHTML += `<div class="solutions">`;
+                resultHTML += `<div class="solution-item">x = ${root.toFixed(4)} (repeated)</div>`;
+                resultHTML += `</div>`;
+            } else {
+                resultDiv.className = 'result-box negative';
+                const realPart = -b / (2 * a);
+                const imagPart = Math.sqrt(-discriminant) / (2 * a);
+                resultHTML += `<p><strong>Nature:</strong> No real roots</p>`;
+                resultHTML += `<div class="solutions">`;
+                resultHTML += `<div class="solution-item">x = ${realPart.toFixed(4)} ± ${imagPart.toFixed(4)}i</div>`;
+                resultHTML += `</div>`;
+            }
+            
+            resultDiv.innerHTML = resultHTML;
+            
+            drawGraph(a, b, c, discriminant);
+        }
+        
+        function drawGraph(a, b, c, discriminant) {
+            const canvas = document.getElementById('graph');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Clear canvas
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Calculate vertex
+            const vertexX = -b / (2 * a);
+            const vertexY = a * vertexX * vertexX + b * vertexX + c;
+            
+            // Determine scale
+            const xRange = 10;
+            const yMax = Math.max(Math.abs(vertexY) * 2, 10);
+            const xScale = width / (2 * xRange);
+            const yScale = (height * 0.8) / (2 * yMax);
+            
+            const centerX = width / 2;
+            const centerY = height / 2;
+            
+            // Draw axes
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(width, centerY);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, height);
+            ctx.stroke();
+            
+            // Draw grid
+            ctx.strokeStyle = '#eee';
+            ctx.lineWidth = 1;
+            for (let i = -xRange; i <= xRange; i++) {
+                if (i !== 0) {
+                    const x = centerX + i * xScale;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+            }
+            
+            // Draw parabola
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            let firstPoint = true;
+            for (let px = -xRange; px <= xRange; px += 0.1) {
+                const py = a * px * px + b * px + c;
+                const canvasX = centerX + px * xScale;
+                const canvasY = centerY - py * yScale;
+                
+                if (firstPoint) {
+                    ctx.moveTo(canvasX, canvasY);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(canvasX, canvasY);
+                }
+            }
+            ctx.stroke();
+            
+            // Draw roots if they exist
+            if (discriminant >= 0) {
+                const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                
+                ctx.fillStyle = '#28a745';
+                const r1x = centerX + root1 * xScale;
+                const r2x = centerX + root2 * xScale;
+                
+                ctx.beginPath();
+                ctx.arc(r1x, centerY, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                if (Math.abs(discriminant) > 0.0001) {
+                    ctx.beginPath();
+                    ctx.arc(r2x, centerY, 6, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+            
+            // Draw vertex
+            ctx.fillStyle = '#764ba2';
+            const vx = centerX + vertexX * xScale;
+            const vy = centerY - vertexY * yScale;
+            ctx.beginPath();
+            ctx.arc(vx, vy, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Labels
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.fillText('x', width - 20, centerY - 10);
+            ctx.fillText('y', centerX + 10, 20);
+        }
+        
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
